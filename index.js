@@ -11,14 +11,14 @@
 function Airplane(name) {
     this.name = name;
     this.isFlying = false;
-  }
-  Airplane.prototype.takeOff = function () {
+}
+Airplane.prototype.takeOff = function () {
     this.isFlying = true;
-  };
-  Airplane.prototype.land = function () {
+};
+Airplane.prototype.land = function () {
     this.isFlying = false;
-  };
-  
+};
+
   
   /*
   // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -39,15 +39,28 @@ function Airplane(name) {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- function Person() {
-    
-  }
- 
- 
+  function Person(attrs) {
+    this.name = attrs.name;
+    this.age = attrs.age;
 
-  
-  
-  
+    const stomach = [];
+
+    this.eat = function (someFood) {
+      if(stomach.length < 10) {
+        stomach.push(someFood);
+      }
+    }
+
+    this.poop = function () {
+      stomach = [];
+    }
+
+  }
+
+  Person.prototype.toString = function() {
+    return `${this.name}, ${this.age}`;
+  };
+
   
   /*
     TASK 2
@@ -63,8 +76,16 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+  function Car(attributes) {
+    this.model = attributes.type;
+    this.milesPerGallon = attributes.milesPerGallon;
+
+    const tank = 0;
+    const odometer = 0;
+
+    this.fill = function(gallons) {
+      tank = tank + gallons;
+    }
   }
   
   
@@ -75,18 +96,26 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
+  function Baby(babyAttrs) {
+    Person.call(this, babyAttrs);
+    this.favoriteToy = babyAttrs.favoriteToy;
+
+    this.play = function() {
+      return `Playing with ${this.favoriteToy}`;
+    }
+
+    Baby.prototype = Object.create(Person.prototype);
   }
  
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. constructor functions - creates code that are reusable.  
+    2. object prototype - objects methods are enclosed within the object
+    hides complex code and reveals simpler ones
+    3. oop - takes input data and returns it as an output
+    4. prototypal inheritance - 
   */
   
   
